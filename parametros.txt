@@ -1,0 +1,14 @@
+Tempo inicial:
+0
+Tempo final (será esse número multiplicado pelo período da órbita T):
+1
+Número de passos:
+1000
+Massa 1 (kg):
+5.972e+24
+Massa 2 (kg):
+7.35e+22
+Se as CI forem elementos orbitais, digite "e", senão, nada
+p 
+Colunas: x y Vx Vy T ou a e M i Ω ω
+-0.293108e+000 0e+000 0e+000 -1.830470e+000 3.1416e+000
