@@ -9,7 +9,7 @@ from graficos import plot_orbita, plot_curvas
 
 with open('parametros.txt', 'r') as param:
     parametros = []
-    for _ in range(6):
+    for _ in range(7):
         next(param)
         linha = next(param)      
         parametros.append(linha.strip())
@@ -19,9 +19,11 @@ with open('parametros.txt', 'r') as param:
     num_passos = int(parametros[2])
     m1 = float(parametros[3])
     m2 = float(parametros[4])
-    tipo = parametros[5]
+    raio = float(parametros[5])
+    tipo = parametros[6]
 
     # Parâmetros de massa (normalizado)
+    G = 6.6743e-11
     mu2 = m2 / (m1 + m2)
     mu1 = 1.0 - mu2 # m1/m1+m2
 
@@ -29,18 +31,12 @@ with open('parametros.txt', 'r') as param:
     for indice, linha in enumerate(param):
         elementos = linha.strip().split()
         # valores = [x, y, Vx, Vy, período]
-        valores = [float(x) for x in elementos[:5]]
+        estado_inicial = [float(x) for x in elementos[:6]]
     
         if tipo == 'e':
             # Problema direto
-            valores = functions.direto(valores, m1, m2)
-            # Precisa agora normalizar as medidas
-
-        # Período do corpo
-        tempo_final *= valores[4]
-
-        # estado inicial = [x, y, z, Vx, Vy, Vz]
-        estado_inicial = [valores[0], valores[1], 0.0, valores[2], valores[3], 0.0]
+            posicao_i, velocidade_i = functions.direto(estado_inicial, m1, m2)
+            estado_inicial = functions.normalizar_e_girar(posicao_i, velocidade_i, tempo_inicial, raio, G*(m1 + m2))
         
         # Vetor de estado inicial
         # valores (x,y,z,Vx,Vy,Vz) de M3 normalizados.
@@ -69,8 +65,10 @@ with open('parametros.txt', 'r') as param:
         plot_orbita(f'Órbita{indice}', solucao[:, 0], solucao[:, 1], 'blue', 'black', mu2, mu1, 'Órbita no PR3C')
 
         # Plotando curvas de velocidade zero:
-        pi = [valores[0], valores[1]]
-        jacobi = [functions.jacobi(mu1, mu2, valores[0], valores[1])]
+        pi = [estado_inicial[0], estado_inicial[1]]
+
+        # Plotando para a constante de jacobi dos valores iniciais
+        jacobi = [functions.jacobi(mu1, mu2, estado_inicial[0], estado_inicial[1])]
         plot_curvas(mu1, mu2, f"Curvas de Velocidade Zero C = {jacobi[0]:.2f}.png", jacobi, pi)
 
         # níveis da constante de Jacobi (curvas de velocidade zero)

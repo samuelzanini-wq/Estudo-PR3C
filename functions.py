@@ -140,9 +140,8 @@ def direto(val, m1, m2):
 
     return pos_inercial, vel_inercial
 
-'''mu é = G*(m1 + m2)'''
 def normalizar_e_girar(posicao, velocidade, tempo_inicial, raio, mu):
-    # 1. Fatores de escala (para normalizar)
+    # 1. Fatores de escala para normalização
     # São como uma unidade padrão
     L = raio
     T = np.sqrt((raio**3) / mu)
@@ -157,13 +156,15 @@ def normalizar_e_girar(posicao, velocidade, tempo_inicial, raio, mu):
     xi, yi, zi = pos_inercial
     Vxi, Vyi, Vzi = vel_inercial
     
+    # Posições no sistema girante
     xg = xi*np.cos(tempo) + yi*np.sin(tempo)
     yg = -xi*np.sin(tempo) + yi*np.cos(tempo)
     zg = zi
-    
+
+    # Velocidades no sistema girante
     Vxg = (Vxi + yi) * np.cos(tempo) + (Vyi - xi) * np.sin(tempo)
     Vyg = -(Vxi + yi) * np.sin(tempo) + (Vyi - xi) * np.cos(tempo)
     Vzg = Vzi
     
-    # [xg, yg, zg], [Vxg, Vyg, Vzg]
-    return [xg, yg, Vxg, Vyg]
+    # vetor de estado inicial
+    return [xg, yg, zg, Vxg, Vyg, Vzg]
