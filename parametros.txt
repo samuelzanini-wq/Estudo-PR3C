@@ -1,16 +1,15 @@
 Tempo inicial:
-0
+
 Tempo final (se for uma órbita periódica, coloque o período normalizado):
-3.1416
+
 Número de passos:
-1000
+
 Massa 1 (kg):
-5.972e+24
+
 Massa 2 (kg):
-7.35e+22
+
 Distância entre m1 e m2 (km):
-384.400
-Se as CI forem elementos orbitais, digite "e", senão não, nada
-p 
+
+Se as CI forem elementos orbitais, digite "e", senão não, nada:
+ 
 Colunas: x y z Vx Vy Vz ou a e M i Ω ω
--0.293108 0 0 0 -1.830470 0

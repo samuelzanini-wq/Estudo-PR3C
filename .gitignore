@@ -1,0 +1,8 @@
+# Ignorar as pastas:
+Curvas_de_velocidade_zero/
+Órbitas/
+Pontos_de_equilíbrio/
+Soluções/
+
+# Ignorar qualquer arquivo que termine com:
+*.txt
