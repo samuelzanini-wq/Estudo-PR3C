@@ -23,7 +23,7 @@ def plot_orbita(titulo, X, Y, cor, cor_ponto, mu2, mu1, titgraf):
     
     plt.close(titulo)
 
-def plot_curvas(mu1, mu2, titulo, niveis_C, pi):
+def plot_curvas(mu1, mu2, titulo, niveis_C, pi, jc):
     #----------------------------Grid-------------------------------------------
     # Cria (grid) para avaliar a função
     x_vals = np.linspace(-2.0, 2.0, 400)
@@ -38,10 +38,11 @@ def plot_curvas(mu1, mu2, titulo, niveis_C, pi):
 
     #---------------------------Gráfico------------------------------------------
 
-    plt.figure(figsize=(8, 8))
+    #plt.figure(figsize=(8, 8))
 
     # Desenha as Curvas de Velocidade Zero (Contornos)
-    curvas = plt.contour(X, Y, Z, levels=niveis_C, colors='blue', linewidths=1)
+    curvas = plt.contour(X, Y, Z, levels=niveis_C, colors='blue', linewidths=0.5)
+    plt.contour(X, Y, Z, levels=jc, colors='red', linewidths=0.5)
     plt.clabel(curvas, inline=True, fontsize=6) # Adiciona o valor de C em cima da linha
 
     # Plotando as massas mu1 e mu2

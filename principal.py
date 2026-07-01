@@ -66,11 +66,8 @@ with open('parametros.txt', 'r') as param:
 
         # Plotando curvas de velocidade zero:
         pi = [estado_inicial[0], estado_inicial[1]]
-
-        # Plotando para a constante de jacobi dos valores iniciais
         jacobi = [functions.jacobi(mu1, mu2, estado_inicial[0], estado_inicial[1])]
-        plot_curvas(mu1, mu2, f"Curvas de Velocidade Zero C = {jacobi[0]:.2f}.png", jacobi, pi)
 
         # níveis da constante de Jacobi (curvas de velocidade zero)
-        niveis_C = list(np.linspace(1, 4, 20))
-        plot_curvas(mu1, mu2, "Curvas de Velocidade Zero (PR3C)", niveis_C, pi)
+        niveis_C = np.linspace(1, 4, 20)
+        plot_curvas(mu1, mu2, "Curvas de Velocidade Zero (PR3C)", niveis_C, pi, jacobi)
